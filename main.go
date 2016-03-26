@@ -33,7 +33,7 @@ func main() {
 	/*  Example : Imply target script and pass every argument to there */
 	/*argc := len(os.Args) + 1
 	argv := make([]uintptr, argc+1)
-	argv[1] = uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("util.py")))
+	argv[1] = uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("main.py")))
 	for i, v := range os.Args[1:] {
 		argv[i+2] = uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(v)))
 	}*/
