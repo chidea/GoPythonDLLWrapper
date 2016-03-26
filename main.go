@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	py          = syscall.NewLazyDLL("Python35.dll")
+	py          = syscall.NewLazyDLL("Python34.dll")
 	Init        = py.NewProc("Py_Initialize")
 	Finalize    = py.NewProc("Py_Finalize")
 	SetPath     = py.NewProc("Py_SetPath")
@@ -25,22 +25,25 @@ var (
 )
 
 func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU()) // use all physical cores
+	runtime.GOMAXPROCS(runtime.NumCPU()) // use all physical cores. for in your case of using go routines
 
 	//prog := uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("python")))
 	//Call(SetProgName, prog)
-	Call(Init)
 	argc := len(os.Args)
 	argv := make([]uintptr, argc)
 	for i, v := range os.Args[1:] {
 		argv[i+1] = uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(v)))
 	}
-	Call(SetArgvEx, uintptr(unsafe.Pointer(&argv[0])), uintptr(argc), uintptr(0))
-	//Call(SetArgv, uintptr(unsafe.Pointer(&argv[0])), uintptr(unsafe.Pointer(&argc))) // May needed for older python versions
-	fmt.Println("Running", os.Args[1], "...")
+
+	Call(Init)
+	s := time.Now()
+	if argc > 1 {
+		fmt.Println("Running", os.Args[1], "...")
+	}
 	Call(Main, uintptr(argc), uintptr(unsafe.Pointer(&argv[0])))
 	//updatepath := 0
-
+	e := time.Since(s)
+	fmt.Println("Execution time :", e)
 	/* Example : inline script instead of external script execution */
 	//script := syscall.StringByteSlice(`from sys import argv; print(argv)`)
 	//script := syscall.StringByteSlice(`import sys; sys.argv=['idea.sh']; from imp import load_module, PY_SOURCE; f='main.py'; load_module('__main__', open(f), f, ('.py', 'r', PY_SOURCE))`)
@@ -48,10 +51,6 @@ func main() {
 
 	Call(Finalize)
 	time.Sleep(1 * time.Microsecond)
-	//Call(Free, prog)
-	for _, v := range argv {
-		Call(Free, v)
-	}
 }
 
 func Call(proc *syscall.LazyProc, args ...uintptr) uintptr {
