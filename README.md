@@ -1,5 +1,5 @@
 # GoPythonDLLWrapper
-A Go program that wraps python dll and scripts to ease up the python program distribution for windows.
+A Go program that wraps python dll and scripts to make it stand-alone for Windows.
 
 ### Target machine and package
   - 32bit Windows, Python 3.4 (To be in compatable with Windows XP)
