@@ -4,7 +4,7 @@ A Go program that wraps python dll and scripts to ease up the python program dis
 ### Target machine and package
   - 32bit, Python 3.4 (To be in compatable with Windows XP)
 
-> This can be easily modified by replacing `python.exe`, `pythonXY.dll`, `libs` directory and files with any version of Python you want.
+> This can be easily modified by replacing `python.exe`, `pythonXY.dll`, `libs` directory and files with any version of Python you want. They're usually in Python installation directory or `%WINDIR%\System32\`.
 
 ### Possible application
   - Go project which bootstraps Python without asking user to setup Python before.
