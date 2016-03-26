@@ -31,6 +31,7 @@ func main() {
 	//Call(SetProgName, prog)
 
 	/*  Example : Imply target script and pass every argument to there */
+	/*						You could also use batch shortcut file bin bin folder as replacement */
 	/*argc := len(os.Args) + 1
 	argv := make([]uintptr, argc+1)
 	argv[1] = uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("main.py")))
