@@ -9,5 +9,10 @@ A Go program that wraps python dll and scripts to ease up the python program dis
   - Go project which bootstraps Python without asking user to setup Python before.
   - Multiple Python interpreters running seperately by Go routines
 
+### Usage
+  1. Build with `go build main.go`
+  2. Just think `main.exe` the same as `python.exe`. Which means you can just `./main` to open python REPL or `./main main.py hello` to run `main.py` script with argument `hello`.
+  3. Feel free modify main.go for your need.
+
 ### Note
 > While everyone thinks it's able to, doing so is entirely burdened on the person who is awaken to.
