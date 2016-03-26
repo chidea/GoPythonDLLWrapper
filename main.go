@@ -29,6 +29,16 @@ func main() {
 
 	//prog := uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("python")))
 	//Call(SetProgName, prog)
+
+	/*  Example : Imply target script and pass every argument to there */
+	/*argc := len(os.Args) + 1
+	argv := make([]uintptr, argc+1)
+	argv[1] = uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("util.py")))
+	for i, v := range os.Args[1:] {
+		argv[i+2] = uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr(v)))
+	}*/
+
+	/*  Example : Simplest wrapper */
 	argc := len(os.Args)
 	argv := make([]uintptr, argc)
 	for i, v := range os.Args[1:] {
@@ -37,9 +47,6 @@ func main() {
 
 	Call(Init)
 	s := time.Now()
-	if argc > 1 {
-		fmt.Println("Running", os.Args[1], "...")
-	}
 	Call(Main, uintptr(argc), uintptr(unsafe.Pointer(&argv[0])))
 	//updatepath := 0
 	e := time.Since(s)
