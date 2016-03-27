@@ -27,6 +27,7 @@ var (
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU()) // use all physical cores. for in your case of using go routines
 
+	/* Explicitly pointing python binary */
 	//prog := uintptr(unsafe.Pointer(syscall.StringToUTF16Ptr("python")))
 	//Call(SetProgName, prog)
 
@@ -48,10 +49,7 @@ func main() {
 
 	Call(Init)
 	s := time.Now()
-	for i := 0; i < 10; i++ {
-		go Call(Main, uintptr(argc), uintptr(unsafe.Pointer(&argv[0])))
-	}
-	//updatepath := 0
+	Call(Main, uintptr(argc), uintptr(unsafe.Pointer(&argv[0])))
 	e := time.Since(s)
 	fmt.Println("Execution time :", e)
 	/* Example : inline script instead of external script execution */
@@ -60,9 +58,7 @@ func main() {
 	//Call(Run, uintptr(unsafe.Pointer(&script[0])))
 
 	Call(Finalize)
-	time.Sleep(1 * time.Microsecond)
 }
-
 func Call(proc *syscall.LazyProc, args ...uintptr) uintptr {
 	r1, r2, le := proc.Call(args...)
 	//fmt.Println(r1, r2, le) // Debug purpose
