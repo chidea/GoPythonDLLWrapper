@@ -1,6 +1,9 @@
 # VIM
 *.un~
 
+# Variable output
+bin/GoPythonDLLWrapper.exe
+
 # Python
 __pycache__
 
