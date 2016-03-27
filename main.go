@@ -48,7 +48,9 @@ func main() {
 
 	Call(Init)
 	s := time.Now()
-	Call(Main, uintptr(argc), uintptr(unsafe.Pointer(&argv[0])))
+	for i := 0; i < 10; i++ {
+		go Call(Main, uintptr(argc), uintptr(unsafe.Pointer(&argv[0])))
+	}
 	//updatepath := 0
 	e := time.Since(s)
 	fmt.Println("Execution time :", e)

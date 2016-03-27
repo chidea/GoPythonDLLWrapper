@@ -2,7 +2,7 @@
 A Go program that wraps python dll and scripts to make it stand-alone for Windows.
 
 ### Target machine and package
-  - 32bit Windows, Python 3.4 (To be in compatable with Windows XP)
+  - 32bit Windows, Python 3.4.4 (To be in compatable with Windows XP)
     - Which means if you're on 64bit Windows, you must set `$env:GOARCH = 386` on PowerShell or `set GOARCH=386` before `go build` or change contents of `lib` directory to 64 bit ones.
 
 > This can be easily modified by replacing files and directories like `python.exe`, `pythonXY.dll`, `msvcrXXX.dll`, `lib` under `bin` directory with any version of Python you want. They're usually in Python installation directory or `%WINDIR%\System32\`.
